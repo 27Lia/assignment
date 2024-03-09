@@ -6,6 +6,51 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
 import { IoChatbubbleSharp } from "react-icons/io5";
 import { PiDotsThreeOutlineLight } from "react-icons/pi";
+import KakaoImage from "../images/kakao.png";
+
+function ChatRoomPage() {
+  return (
+    <Container>
+      <Nav>
+        <Chat>chats</Chat>
+        <Box>
+          <Icon>
+            <CiSearch />
+          </Icon>
+          <Icon>
+            <IoChatbubbleOutline />
+          </Icon>
+          <Icon>
+            <LuMusic4 />
+          </Icon>
+          <Icon>
+            <IoSettingsOutline />
+          </Icon>
+        </Box>
+      </Nav>
+      <ChatContainer>
+        <ChatList>
+          <Img src={KakaoImage} alt="Kakao Image" />
+          <MessageData>
+            <Name>이름</Name>
+            <Text>내용</Text>
+          </MessageData>
+          <AlertData>
+            <Time>시간</Time>
+            <Alert>알림</Alert>
+          </AlertData>
+        </ChatList>
+      </ChatContainer>
+      <Footer>
+        <IoPersonOutline />
+
+        <IoChatbubbleSharp />
+        <CiSearch />
+        <PiDotsThreeOutlineLight />
+      </Footer>
+    </Container>
+  );
+}
 
 const Container = styled.div`
   height: 100vh;
@@ -16,7 +61,7 @@ const Container = styled.div`
 const Nav = styled.div`
   display: flex;
   align-items: center;
-  height: 70px;
+  height: 80px;
   padding: 0px 30px 0px 30px;
 `;
 
@@ -33,6 +78,7 @@ const Box = styled.div`
 
 const Icon = styled.div`
   margin: 0 10px;
+  font-size: 28px;
 `;
 
 const ChatContainer = styled.div`
@@ -48,7 +94,11 @@ const ChatList = styled.div`
   align-items: center;
 `;
 
-const Img = styled.div``;
+const Img = styled.img`
+  width: 70px;
+  height: 70px;
+  border-radius: 20px;
+`;
 
 const MessageData = styled.div`
   display: flex;
@@ -73,49 +123,5 @@ const Footer = styled.div`
   height: 70px;
   background-color: #f9f9fa;
 `;
-
-function ChatRoomPage() {
-  return (
-    <Container>
-      <Nav>
-        <Chat>chats</Chat>
-        <Box>
-          <Icon>
-            <CiSearch />
-          </Icon>
-          <Icon>
-            <IoChatbubbleOutline />
-          </Icon>
-          <Icon>
-            <LuMusic4 />
-          </Icon>
-          <Icon>
-            <IoSettingsOutline />
-          </Icon>
-        </Box>
-      </Nav>
-      <ChatContainer>
-        <ChatList>
-          <Img>이미지</Img>
-          <MessageData>
-            <Name>이름</Name>
-            <Text>내용</Text>
-          </MessageData>
-          <AlertData>
-            <Time>시간</Time>
-            <Alert>알림</Alert>
-          </AlertData>
-        </ChatList>
-      </ChatContainer>
-      <Footer>
-        <IoPersonOutline />
-
-        <IoChatbubbleSharp />
-        <CiSearch />
-        <PiDotsThreeOutlineLight />
-      </Footer>
-    </Container>
-  );
-}
 
 export default ChatRoomPage;

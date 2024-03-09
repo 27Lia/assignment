@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import auth from "../firebase";
 
 export const Container = styled.div`
   height: 100vh;
@@ -66,10 +68,19 @@ const Find = styled.div`
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    navigate("/chat");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/chat");
+    } catch (error) {
+      console.error(error.message);
+    }
   };
+
   return (
     <Container>
       <Title>Welcome to KakaoTalk</Title>
@@ -78,8 +89,15 @@ const LoginPage = () => {
         number.
       </Description>
       <LoginContainer>
-        <Input placeholder="Email or Phone Number" />
-        <Input placeholder="Password" type="password" />
+        <Input
+          placeholder="Email or Phone Number"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          placeholder="Password"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <BtnBox>
           <LoginBtn onClick={handleLogin}>Log In</LoginBtn>
           <SignBtn>Sign Up</SignBtn>
