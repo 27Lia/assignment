@@ -56,19 +56,19 @@ function ChatRoomPage() {
           <ChatList>
             <Img src={KakaoImage} alt="Kakao Image" />
             <MessageData>
-              <Name>{room.name}</Name>
-              <Text>{room.lastMessage}</Text>
+              <div>{room.name}</div>
+              <div>{room.lastMessage}</div>
             </MessageData>
-            <AlertData>
-              <Time>
+            <div>
+              <div>
                 {room.timestamp
                   ? room.timestamp.toLocaleTimeString([], timeOptions)
                   : ""}
-              </Time>
+              </div>
               <Alert>
                 <TbCircleNumber1 />
               </Alert>
-            </AlertData>
+            </div>
           </ChatList>
         ))}
       </ChatContainer>
@@ -81,10 +81,11 @@ function ChatRoomPage() {
     </Container>
   );
 }
-export const Container = styled.div`
-  height: 100vh;
+
+const Container = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100vh;
 `;
 
 const Nav = styled.div`
@@ -136,16 +137,10 @@ const MessageData = styled.div`
   flex: 1;
 `;
 
-const Name = styled.div``;
-const Text = styled.div``;
-
-const AlertData = styled.div``;
-
 const Alert = styled.div`
   font-size: 32px;
   text-align: right;
 `;
-const Time = styled.div``;
 
 const Footer = styled.div`
   display: flex;
