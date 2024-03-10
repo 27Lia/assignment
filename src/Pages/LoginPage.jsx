@@ -51,6 +51,7 @@ const LoginBtn = styled.button`
   border: none;
   padding: 25px 0px 25px 0px;
   font-size: 25px;
+  cursor: pointer;
 `;
 const SignBtn = styled.button`
   background-color: #f6f6f6;
@@ -73,37 +74,46 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      alert("이메일과 비밀번호를 입력해주세요.");
+      return;
+    }
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/chat");
     } catch (error) {
+      alert("로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.");
       console.error(error.message);
     }
   };
 
   return (
     <Container>
-      <Title>Welcome to KakaoTalk</Title>
-      <Description>
-        If you have a Kakao Account,<br></br>log in with your email or phone
-        number.
-      </Description>
-      <LoginContainer>
-        <Input
-          placeholder="Email or Phone Number"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Input
-          placeholder="Password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <BtnBox>
-          <LoginBtn onClick={handleLogin}>Log In</LoginBtn>
-          <SignBtn>Sign Up</SignBtn>
-        </BtnBox>
-        <Find>Find Kakao Account or PassWord</Find>
-      </LoginContainer>
+      <form onSubmit={handleLogin}>
+        <Title>Welcome to KakaoTalk</Title>
+        <Description>
+          If you have a Kakao Account,<br></br>log in with your email or phone
+          number.
+        </Description>
+        <LoginContainer>
+          <Input
+            placeholder="Email or Phone Number"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            placeholder="Password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <BtnBox>
+            <LoginBtn onClick={handleLogin}>Log In</LoginBtn>
+            <SignBtn>Sign Up</SignBtn>
+          </BtnBox>
+          <Find>Find Kakao Account or PassWord</Find>
+        </LoginContainer>
+      </form>
     </Container>
   );
 };
