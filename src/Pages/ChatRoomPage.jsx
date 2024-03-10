@@ -7,13 +7,10 @@ import { IoPersonOutline } from "react-icons/io5";
 import { IoChatbubbleSharp } from "react-icons/io5";
 import { PiDotsThreeOutlineLight } from "react-icons/pi";
 import KakaoImage from "../images/kakao.png";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { TbCircleNumber1 } from "react-icons/tb";
 
 function ChatRoomPage() {
-  const navigate = useNavigate();
-
   const [chatRooms] = useState([
     {
       id: 1,
@@ -29,9 +26,12 @@ function ChatRoomPage() {
     },
   ]);
 
-  const handleChatRoomClick = (roomId) => {
-    navigate(`/chat/${roomId}`);
+  const timeOptions = {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: false,
   };
+
   return (
     <Container>
       <Nav>
@@ -53,7 +53,7 @@ function ChatRoomPage() {
       </Nav>
       <ChatContainer>
         {chatRooms.map((room) => (
-          <ChatList key={room.id} onClick={() => handleChatRoomClick(room.id)}>
+          <ChatList>
             <Img src={KakaoImage} alt="Kakao Image" />
             <MessageData>
               <Name>{room.name}</Name>
@@ -61,7 +61,9 @@ function ChatRoomPage() {
             </MessageData>
             <AlertData>
               <Time>
-                {room.timestamp ? room.timestamp.toLocaleTimeString() : ""}
+                {room.timestamp
+                  ? room.timestamp.toLocaleTimeString([], timeOptions)
+                  : ""}
               </Time>
               <Alert>
                 <TbCircleNumber1 />

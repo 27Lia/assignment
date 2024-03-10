@@ -3,6 +3,7 @@ import { FaWifi } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { FaBatteryQuarter } from "react-icons/fa6";
 import { AiFillThunderbolt } from "react-icons/ai";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -31,6 +32,22 @@ const RightBar = styled.div`
 `;
 
 const Header = () => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const timeOptions = {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: false,
+  };
+
   return (
     <>
       <Container>
@@ -41,7 +58,7 @@ const Header = () => {
           </div>
         </LeftBar>
         <Center>
-          <div>현재시간</div>
+          <div>{currentTime.toLocaleTimeString([], timeOptions)}</div>
         </Center>
         <RightBar>
           <div>
